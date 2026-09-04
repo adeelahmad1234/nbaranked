@@ -11,7 +11,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-orange">
-      <Header />
+      <Header onLogoClick={ranker.goHome} />
       <AnimatePresence mode="wait">
         {ranker.phase === 'landing' && (
           <LandingScreen key="landing" onStart={ranker.beginCut} />

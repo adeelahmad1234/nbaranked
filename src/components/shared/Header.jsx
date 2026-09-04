@@ -8,12 +8,19 @@ import { PrivacyModal } from './PrivacyModal.jsx';
 // (same hue, same value). Orange-on-navy verifies at 4.63:1, well within AA for text
 // this large, and gives the brand a consistent, structured presence instead of only
 // appearing once on the landing screen.
-export function Header() {
+export function Header({ onLogoClick }) {
   const [privacyOpen, setPrivacyOpen] = useState(false);
 
   return (
     <header className="flex items-center justify-between bg-navy px-4 py-3 sm:px-6">
-      <Wordmark className="h-8 w-auto sm:h-9" />
+      <button
+        type="button"
+        onClick={onLogoClick}
+        aria-label="Go to the home screen"
+        className="outline-none focus-visible:ring-2 focus-visible:ring-white"
+      >
+        <Wordmark className="h-8 w-auto sm:h-9" />
+      </button>
       <button
         type="button"
         onClick={() => setPrivacyOpen(true)}

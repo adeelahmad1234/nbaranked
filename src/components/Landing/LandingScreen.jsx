@@ -12,6 +12,9 @@ export function LandingScreen({ onStart }) {
       transition={{ duration: 0.2 }}
       className="mx-auto flex min-h-[calc(100vh-64px)] max-w-2xl flex-col items-center justify-center gap-8 px-4 py-16 text-center"
     >
+      <h1 className="max-w-lg text-2xl font-extrabold text-navy sm:text-3xl">
+        The biggest, and BEST, playground style NBA player ranker out there!
+      </h1>
       <p className="max-w-md text-lg text-navy sm:text-xl">
         Cut {REQUIRED_CUTS} of {PLAYERS.length} current NBA players, then settle every
         remaining matchup head to head to build your definitive top{' '}

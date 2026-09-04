@@ -18,6 +18,13 @@ export function useRankerSession() {
     setState((s) => ({ ...s, phase: 'cut' }));
   }, []);
 
+  // Logo click, from any screen: just switches the view to landing, doesn't touch any
+  // in-progress cut/comparison data — clicking "Start Ranking" again picks back up from
+  // the cut screen with prior eliminations still marked, same as Undo-to-cut does.
+  const goHome = useCallback(() => {
+    setState((s) => ({ ...s, phase: 'landing' }));
+  }, []);
+
   const confirmCut = useCallback((eliminatedIds) => {
     setState((s) => session.confirmCut(s, eliminatedIds));
   }, []);
@@ -73,6 +80,7 @@ export function useRankerSession() {
     finalRanking: state.finalRanking,
     canUndo: session.canUndo(state),
     beginCut,
+    goHome,
     confirmCut,
     answer,
     undo,
