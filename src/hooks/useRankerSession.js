@@ -3,6 +3,7 @@ import { loadSession, saveSession, clearSession } from '../lib/storage.js';
 import * as session from '../lib/sortSession.js';
 import * as sort from '../lib/binaryInsertionSort.js';
 import { PLAYERS } from '../data/players.js';
+import { REQUIRED_CUTS } from '../lib/sortSession.js';
 
 // The only stateful hook in the app. Every screen component receives plain props/callbacks
 // from here and stays presentational — see App.jsx.
@@ -46,11 +47,12 @@ export function useRankerSession() {
   useEffect(() => {
     if (!import.meta.env.DEV) return;
     const seedResults = (rankingIds) => {
-      const ranking = rankingIds ?? PLAYERS.slice(0, 25).map((p) => p.id);
+      const headToHeadCount = PLAYERS.length - REQUIRED_CUTS;
+      const ranking = rankingIds ?? PLAYERS.slice(0, headToHeadCount).map((p) => p.id);
       setState({
         version: 1,
         phase: 'results',
-        eliminatedIds: PLAYERS.slice(25).map((p) => p.id),
+        eliminatedIds: PLAYERS.slice(headToHeadCount).map((p) => p.id),
         insertionOrder: ranking,
         comparisonLog: [],
         finalRanking: ranking,
@@ -65,7 +67,8 @@ export function useRankerSession() {
     phase: state.phase,
     eliminatedIds: state.eliminatedIds,
     comparisonsMade: sortState?.comparisonsMade ?? 0,
-    maxComparisons: sortState?.maxComparisons ?? sort.computeMaxComparisons(25),
+    maxComparisons:
+      sortState?.maxComparisons ?? sort.computeMaxComparisons(PLAYERS.length - REQUIRED_CUTS),
     currentComparison,
     finalRanking: state.finalRanking,
     canUndo: session.canUndo(state),

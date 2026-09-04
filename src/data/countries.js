@@ -12,6 +12,9 @@ export const COUNTRY_CODES = {
   Australia: 'au',
   Germany: 'de',
   Turkey: 'tr',
+  Israel: 'il',
+  England: 'gb-eng',
+  Finland: 'fi',
 };
 
 export function flagUrl(countryCode, size = 'w40') {

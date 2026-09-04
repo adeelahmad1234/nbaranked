@@ -3,6 +3,10 @@
 import { PLAYERS } from '../data/players.js';
 import * as sort from './binaryInsertionSort.js';
 
+// Single source of truth for how many of the pool get cut in the first round —
+// CutScreen.jsx imports this too, so the two never drift apart.
+export const REQUIRED_CUTS = 25;
+
 export function createEmptySession() {
   return {
     version: 1,
@@ -24,8 +28,8 @@ function shuffledIds(ids) {
 }
 
 export function confirmCut(session, eliminatedIds) {
-  if (eliminatedIds.length !== 5) {
-    throw new Error('Must eliminate exactly 5 players before confirming');
+  if (eliminatedIds.length !== REQUIRED_CUTS) {
+    throw new Error(`Must eliminate exactly ${REQUIRED_CUTS} players before confirming`);
   }
   const remaining = PLAYERS.map((p) => p.id).filter((id) => !eliminatedIds.includes(id));
   return {
@@ -70,7 +74,7 @@ export function canUndo(session) {
 }
 
 // Steps back one decision at a time: results -> last comparison re-opened -> ... ->
-// first comparison -> cut screen (with the previous 5 eliminations pre-selected, so the
+// first comparison -> cut screen (with the previous eliminations pre-selected, so the
 // user can adjust rather than starting over). This is the full "undo until the
 // beginning" chain.
 export function undo(session) {

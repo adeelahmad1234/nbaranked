@@ -3,7 +3,7 @@ import { COUNTRY_CODES } from './countries.js';
 const headshot = (espnId) =>
   `https://a.espncdn.com/i/headshots/nba/players/full/${espnId}.png`;
 
-// Curated pool of 30 current NBA players, verified live against ESPN's API
+// Curated pool of 50 current NBA players, verified live against ESPN's API
 // (team/active-status can drift season to season — re-verify before editing).
 //
 // [id, name, team, position, jersey, country, pts, reb, ast]
@@ -42,6 +42,26 @@ const RAW = [
   ['4871144', 'Alperen Sengun', 'Houston Rockets', 'C', 28, 'Turkey', 20.4, 8.9, 6.2],
   ['4432166', 'Cade Cunningham', 'Detroit Pistons', 'G', 2, 'USA', 23.9, 5.5, 9.9],
   ['4432816', 'LaMelo Ball', 'Minnesota Timberwolves', 'G', null, 'USA', 20.1, 4.8, 7.1],
+  ['3917376', 'Jaylen Brown', 'Philadelphia 76ers', 'G', 7, 'USA', 28.7, 6.9, 5.1],
+  ['4431678', 'Tyrese Maxey', 'Philadelphia 76ers', 'G', 0, 'USA', 28.3, 4.1, 6.6],
+  ['4433134', 'Scottie Barnes', 'Toronto Raptors', 'F', 4, 'USA', 18.1, 7.5, 5.9],
+  ['4593803', 'Jalen Williams', 'Oklahoma City Thunder', 'G', 8, 'USA', 17.1, 4.6, 5.5],
+  ['4701230', 'Jalen Johnson', 'Atlanta Hawks', 'F', 1, 'USA', 22.5, 10.3, 7.9],
+  ['4845367', 'Stephon Castle', 'San Antonio Spurs', 'G', 5, 'USA', 16.7, 5.3, 7.4],
+  ['3992', 'James Harden', 'Cleveland Cavaliers', 'G', 1, 'USA', 23.6, 4.8, 8.0],
+  ['4066457', 'Austin Reaves', 'Los Angeles Lakers', 'G', 15, 'USA', 23.3, 4.7, 5.5],
+  ['3149673', 'Pascal Siakam', 'Indiana Pacers', 'F', 43, 'Cameroon', 24.0, 6.6, 3.8],
+  ['4683021', 'Deni Avdija', 'Portland Trail Blazers', 'F', 8, 'Israel', 24.2, 6.9, 6.7],
+  ['4432158', 'Evan Mobley', 'Cleveland Cavaliers', 'C', 4, 'USA', 18.2, 9.0, 3.6],
+  ['3032976', 'Rudy Gobert', 'Minnesota Timberwolves', 'C', 27, 'France', 10.9, 11.5, 1.7],
+  ['3934719', 'OG Anunoby', 'New York Knicks', 'F', 8, 'England', 16.7, 5.2, 2.2],
+  ['4433255', 'Chet Holmgren', 'Oklahoma City Thunder', 'C', 7, 'USA', 17.1, 8.9, 1.7],
+  ['4395628', 'Zion Williamson', 'New Orleans Pelicans', 'F', 1, 'USA', 21.0, 5.7, 3.2],
+  ['5041939', 'Cooper Flagg', 'Dallas Mavericks', 'F', 32, 'USA', 21.0, 6.7, 4.5],
+  ['5037871', 'Dylan Harper', 'San Antonio Spurs', 'G', 2, 'USA', 11.8, 3.4, 3.9],
+  ['4684740', 'Amen Thompson', 'Houston Rockets', 'G', 1, 'USA', 18.3, 7.8, 5.3],
+  ['4066336', 'Lauri Markkanen', 'Utah Jazz', 'F', 23, 'Finland', 26.7, 6.9, 2.1],
+  ['3936299', 'Jamal Murray', 'Denver Nuggets', 'G', 27, 'Canada', 25.4, 4.4, 7.1],
 ];
 
 // pts/reb/ast season, per player — defaults to '2025-26'; overridden for the three who
