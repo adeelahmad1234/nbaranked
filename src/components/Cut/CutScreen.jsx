@@ -43,7 +43,7 @@ export function CutScreen({ onConfirm, initialSelected = [] }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="mx-auto max-w-6xl px-4 py-6 sm:px-6"
+      className="mx-auto max-w-[90rem] px-4 py-6 sm:px-6"
     >
       <div className="sticky top-0 z-10 mb-4 flex flex-col gap-2 bg-orange py-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
