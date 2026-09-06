@@ -1,4 +1,4 @@
-# nbaRanker
+# nbaRanked
 
 [nbaranked.com](https://nbaranked.com)
 
