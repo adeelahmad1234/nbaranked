@@ -8,7 +8,7 @@ export function Wordmark({
   align = 'center',
 }) {
   return (
-    <svg viewBox="0 0 520 90" className={className} role="img" aria-label="nbaRANKER">
+    <svg viewBox="0 0 760 90" className={className} role="img" aria-label="nbaRANKED.com">
       <text
         x={align === 'start' ? '0' : '50%'}
         y="66"
@@ -21,7 +21,7 @@ export function Wordmark({
         strokeWidth={strokeWidth}
         paintOrder="stroke fill"
       >
-        nbaRANKER
+        nbaRANKED.com
       </text>
     </svg>
   );
