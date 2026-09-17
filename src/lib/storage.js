@@ -5,7 +5,11 @@ export function loadSession() {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
-    return parsed && parsed.version === 1 ? parsed : null;
+    if (!parsed || parsed.version !== 1) return null;
+    // Sessions saved before Position Ranking shipped have no poolKey — default it to the
+    // main pool rather than leaving it undefined, which crashes every poolKey === 'ALL'
+    // check downstream into the position-loading branch for a pool that doesn't exist.
+    return { ...parsed, poolKey: parsed.poolKey ?? 'ALL' };
   } catch {
     return null;
   }
