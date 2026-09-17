@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { PlayerImage } from '../shared/PlayerImage.jsx';
 import { FlagIcon } from '../shared/FlagIcon.jsx';
-import { Stat } from '../shared/Stat.jsx';
+import { Stat, formatStat } from '../shared/Stat.jsx';
 
 export const ComparisonCard = forwardRef(function ComparisonCard(
   { player, otherName, onChoose },
@@ -32,11 +32,11 @@ export const ComparisonCard = forwardRef(function ComparisonCard(
         </div>
       </div>
       <div className="flex items-center gap-4 border-t border-border px-3 py-2.5 sm:gap-6">
-        <Stat value={player.pts.toFixed(1)} label="PTS" />
-        <Stat value={player.reb.toFixed(1)} label="REB" />
-        <Stat value={player.ast.toFixed(1)} label="AST" />
+        <Stat value={formatStat(player.pts)} label="PTS" />
+        <Stat value={formatStat(player.reb)} label="REB" />
+        <Stat value={formatStat(player.ast)} label="AST" />
         <p className="ml-auto shrink-0 whitespace-nowrap text-[9px] font-semibold uppercase tracking-wide text-navy-soft/70 sm:text-[10px]">
-          {player.statsSeason} season
+          {player.statsSeason ? `${player.statsSeason} season` : 'Rookie · no stats yet'}
         </p>
       </div>
     </button>

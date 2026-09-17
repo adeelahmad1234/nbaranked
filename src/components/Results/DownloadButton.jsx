@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toPng } from 'html-to-image';
 import { Button } from '../shared/Button.jsx';
 
-export function DownloadButton({ captureRef }) {
+export function DownloadButton({ captureRef, filename = 'nbaRanker-top25.png' }) {
   const [status, setStatus] = useState('idle'); // idle | generating | error
 
   async function handleDownload() {
@@ -15,7 +15,7 @@ export function DownloadButton({ captureRef }) {
         backgroundColor: '#E8590C',
       });
       const link = document.createElement('a');
-      link.download = 'nbaRanker-top25.png';
+      link.download = filename;
       link.href = dataUrl;
       link.click();
       setStatus('idle');

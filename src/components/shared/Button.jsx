@@ -6,10 +6,18 @@ const VARIANTS = {
   secondary: 'bg-surface text-navy border border-navy hover:bg-orange/10',
 };
 
-export function Button({ variant = 'primary', className = '', ...props }) {
+// "lg" is the primary-navigation size (Landing's two entry buttons, the five position
+// buttons) — bigger tap targets for accessibility. Everything else (Confirm Cut, Undo,
+// Download, Start Over, ...) keeps the original "md" size.
+const SIZES = {
+  md: 'px-6 py-3 text-sm',
+  lg: 'px-8 py-5 text-base sm:px-10 sm:text-lg',
+};
+
+export function Button({ variant = 'primary', size = 'md', className = '', ...props }) {
   return (
     <button
-      className={`px-6 py-3 text-sm font-bold uppercase tracking-wide transition-colors duration-150 disabled:cursor-not-allowed ${VARIANTS[variant]} ${className}`}
+      className={`font-bold uppercase tracking-wide transition-colors duration-150 disabled:cursor-not-allowed ${SIZES[size]} ${VARIANTS[variant]} ${className}`}
       {...props}
     />
   );

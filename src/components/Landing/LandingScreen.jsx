@@ -3,7 +3,7 @@ import { Button } from '../shared/Button.jsx';
 import { PLAYERS } from '../../data/players.js';
 import { REQUIRED_CUTS } from '../../lib/sortSession.js';
 
-export function LandingScreen({ onStart }) {
+export function LandingScreen({ onStartCurrent, onStartPosition }) {
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -18,11 +18,16 @@ export function LandingScreen({ onStart }) {
       <p className="max-w-md text-lg text-navy sm:text-xl">
         Cut {REQUIRED_CUTS} of {PLAYERS.length} current NBA players, then settle every
         remaining matchup head to head to build your definitive top{' '}
-        {PLAYERS.length - REQUIRED_CUTS}.
+        {PLAYERS.length - REQUIRED_CUTS}. Or rank one position at a time instead.
       </p>
-      <Button onClick={onStart} className="text-base">
-        Start Ranking
-      </Button>
+      <div className="flex w-full max-w-sm flex-col gap-4">
+        <Button size="lg" onClick={onStartCurrent}>
+          Current Player Rankings
+        </Button>
+        <Button size="lg" onClick={onStartPosition}>
+          Position Ranking
+        </Button>
+      </div>
     </motion.section>
   );
 }

@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { PLAYERS } from '../../data/players.js';
-import { REQUIRED_CUTS } from '../../lib/sortSession.js';
 import { PlayerCutCard } from './PlayerCutCard.jsx';
 import { Button } from '../shared/Button.jsx';
 
@@ -14,11 +12,15 @@ function shuffled(items) {
   return a;
 }
 
-export function CutScreen({ onConfirm, initialSelected = [] }) {
+// Pool-agnostic: `players` and `requiredCuts` come from whichever pool is active (the
+// main 50, cutting 25, or a 25-player position pool, cutting 10) — see useRankerSession.
+// `isPosition` only changes the grid's column count (a fixed 5x5 for a 25-player position
+// pool, vs the main pool's wider responsive ramp for 50).
+export function CutScreen({ players, requiredCuts, isPosition = false, onConfirm, initialSelected = [] }) {
   // Shuffled once per visit to this screen (not on every re-render, so the grid doesn't
   // reorder under the user's finger while they're selecting) to keep display order from
   // biasing which players get noticed and cut.
-  const [displayOrder] = useState(() => shuffled(PLAYERS));
+  const [displayOrder] = useState(() => shuffled(players));
   const [selected, setSelected] = useState(initialSelected);
   const [hint, setHint] = useState(false);
 
@@ -28,7 +30,7 @@ export function CutScreen({ onConfirm, initialSelected = [] }) {
         setHint(false);
         return prev.filter((x) => x !== id);
       }
-      if (prev.length >= REQUIRED_CUTS) {
+      if (prev.length >= requiredCuts) {
         setHint(true);
         return prev;
       }
@@ -48,15 +50,15 @@ export function CutScreen({ onConfirm, initialSelected = [] }) {
       <div className="sticky top-0 z-10 mb-4 flex flex-col gap-2 bg-orange py-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-xl font-extrabold text-navy sm:text-2xl">
-            Cut {REQUIRED_CUTS} players
+            Cut {requiredCuts} players
           </h1>
           <p aria-live="polite" className="text-sm font-semibold text-navy">
-            {selected.length} of {REQUIRED_CUTS} selected
+            {selected.length} of {requiredCuts} selected
           </p>
         </div>
         <Button
           variant="primary"
-          disabled={selected.length !== REQUIRED_CUTS}
+          disabled={selected.length !== requiredCuts}
           onClick={() => onConfirm(selected)}
         >
           Confirm Cut
@@ -65,14 +67,18 @@ export function CutScreen({ onConfirm, initialSelected = [] }) {
 
       {hint && (
         <p role="status" className="mb-3 text-sm font-semibold text-navy">
-          You can only cut {REQUIRED_CUTS} players. Tap one to unmark it first.
+          You can only cut {requiredCuts} players. Tap one to unmark it first.
         </p>
       )}
 
       <div
         role="group"
         aria-label="Players available to cut"
-        className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-10"
+        className={
+          isPosition
+            ? 'grid grid-cols-3 gap-3 sm:grid-cols-5 sm:gap-4'
+            : 'grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-10'
+        }
       >
         {displayOrder.map((player) => (
           <PlayerCutCard

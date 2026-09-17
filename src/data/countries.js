@@ -15,6 +15,12 @@ export const COUNTRY_CODES = {
   Israel: 'il',
   England: 'gb-eng',
   Finland: 'fi',
+  Bahamas: 'bs',
+  Belgium: 'be',
+  Croatia: 'hr',
+  Latvia: 'lv',
+  Portugal: 'pt',
+  'DR Congo': 'cd',
 };
 
 export function flagUrl(countryCode, size = 'w40') {

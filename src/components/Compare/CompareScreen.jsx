@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { PLAYERS_BY_ID } from '../../data/players.js';
 import { ComparisonCard } from './ComparisonCard.jsx';
 import { ProgressBar } from './ProgressBar.jsx';
 import { Button } from '../shared/Button.jsx';
@@ -9,6 +8,7 @@ export function CompareScreen({
   comparison,
   comparisonsMade,
   maxComparisons,
+  playersById,
   onAnswer,
   onUndo,
 }) {
@@ -22,8 +22,8 @@ export function CompareScreen({
 
   if (!comparison) return null;
 
-  const playerA = PLAYERS_BY_ID[comparison.a];
-  const playerB = PLAYERS_BY_ID[comparison.b];
+  const playerA = playersById[comparison.a];
+  const playerB = playersById[comparison.b];
 
   function handleKeyDown(event) {
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
@@ -60,7 +60,7 @@ export function CompareScreen({
 
       <div className="flex flex-1 flex-col items-stretch justify-center">
         <h1 className="mb-4 text-center text-lg font-extrabold text-navy sm:text-xl">
-          Who ranks higher?
+          Who&apos;s better?
         </h1>
         <motion.div
           key={pairKey}

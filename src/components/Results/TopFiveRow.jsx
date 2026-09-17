@@ -1,6 +1,6 @@
 import { PlayerImage } from '../shared/PlayerImage.jsx';
 import { FlagIcon } from '../shared/FlagIcon.jsx';
-import { Stat } from '../shared/Stat.jsx';
+import { Stat, formatStat } from '../shared/Stat.jsx';
 
 // Full literal class names (not built from a template string) so Tailwind's scanner can
 // actually find them — a dynamically-interpolated class name wouldn't get generated.
@@ -57,12 +57,12 @@ export function TopFiveRow({ player, rank }) {
           </p>
         </div>
         <div className="flex gap-4 sm:gap-6">
-          <Stat value={player.pts.toFixed(1)} label="PTS" size="lg" />
-          <Stat value={player.reb.toFixed(1)} label="REB" size="lg" />
-          <Stat value={player.ast.toFixed(1)} label="AST" size="lg" />
+          <Stat value={formatStat(player.pts)} label="PTS" size="lg" />
+          <Stat value={formatStat(player.reb)} label="REB" size="lg" />
+          <Stat value={formatStat(player.ast)} label="AST" size="lg" />
         </div>
         <p className="mt-1.5 text-[10px] font-semibold uppercase tracking-wide text-navy-soft/70 sm:text-xs">
-          {player.statsSeason} season
+          {player.statsSeason ? `${player.statsSeason} season` : 'Rookie · no stats yet'}
         </p>
       </div>
     </div>
