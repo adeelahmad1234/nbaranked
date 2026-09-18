@@ -20,7 +20,9 @@ export function Header({ onLogoClick, onReset }) {
           aria-label="Go to the home screen"
           className="shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
-          <Wordmark className="h-7 w-auto sm:h-9" />
+          {/* 594 is the text's width at the 72px font size, so the box hugs the letters and
+              the wordmark sits exactly at the header's left padding, mirroring Privacy. */}
+          <Wordmark className="h-7 w-auto sm:h-9" align="start" viewBox="0 0 594 90" />
         </button>
         <button
           type="button"

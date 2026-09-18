@@ -6,9 +6,10 @@ export function Wordmark({
   stroke = 'var(--color-navy)',
   strokeWidth = 3,
   align = 'center',
+  viewBox = '0 0 760 90',
 }) {
   return (
-    <svg viewBox="0 0 760 90" className={className} role="img" aria-label="nbaRANKED.com">
+    <svg viewBox={viewBox} className={className} role="img" aria-label="nbaRANKED.com">
       <text
         x={align === 'start' ? '0' : '50%'}
         y="66"
